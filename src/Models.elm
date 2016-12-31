@@ -37,7 +37,7 @@ initialModel =
 
 newPerson : Model -> Person
 newPerson model =
-    { id = List.length model.people
+    { id = (List.length model.people) + 1
     , name = model.personName
     , gender = model.personGender
     , fatherId = Nothing
