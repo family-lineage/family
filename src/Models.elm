@@ -9,7 +9,8 @@ type alias Person =
     { id : PersonId
     , name : String
     , gender : Gender
-    , parentId : Maybe PersonId
+    , fatherId : Maybe PersonId
+    , motherId : Maybe PersonId
     , spouseId : Maybe PersonId
     }
 

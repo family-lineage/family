@@ -9,6 +9,7 @@ update msg model =
     case msg of
         Save ->
             savePerson model
+
         _ ->
             model
 
@@ -17,7 +18,7 @@ savePerson : Model -> Model
 savePerson model =
     let
         person =
-            Person (List.length model.people) model.personName model.personGender Nothing Nothing
+            Person (List.length model.people) model.personName model.personGender Nothing Nothing Nothing
 
         newPeople =
             person :: model.people
