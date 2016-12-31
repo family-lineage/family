@@ -1,28 +1,43 @@
 module Views exposing (..)
 
-import Html exposing (Html, div, text, label, input, span, button)
-import Html.Attributes exposing (type_, name)
-import Html.Events exposing (onClick)
+import Html exposing (Html, div, text, label, input, span, button, h1, p)
+import Html.Attributes exposing (type_, name, placeholder, value)
+import Html.Events exposing (onClick, onSubmit)
 import Messages exposing (Msg(..))
 import Models exposing (Model)
 
 
-formView : Html Msg
-formView =
+formView : Model -> Html Msg
+formView model =
     div []
+        [ h1 [] [ text "Family Tree" ]
+        , personForm model
+        , p [] [ text (toString model) ]
+        ]
+
+personForm : Model -> Html Msg
+personForm model =
+    Html.form [ onSubmit Save ]
         [ div []
-            [ label [] [ text "Name" ]
-            , input [] []
-            ]
-        , div []
-            [ label [] [ text "Gender" ]
-            , div []
-                [ radio "Male" NoOp
-                , radio "Female" NoOp
+            [ div []
+                [ label [] [ text "Name" ]
+                , input
+                    [ type_ "text"
+                    , placeholder "Input name here"
+                    , value model.personName
+                    ]
+                    []
                 ]
-            ]
-        , div []
-            [ button [] [ text "Save" ]
+            , div []
+                [ label [] [ text "Gender" ]
+                , div []
+                    [ radio "Male" NoOp
+                    , radio "Female" NoOp
+                    ]
+                ]
+            , div []
+                [ button [] [ text "Save" ]
+                ]
             ]
         ]
 
@@ -42,4 +57,4 @@ radio fieldLabel message =
 
 view : Model -> Html Msg
 view model =
-    formView
+    formView model
