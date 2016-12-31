@@ -1,10 +1,16 @@
 module Models exposing (..)
 
 
+type alias PersonId =
+    Int
+
+
 type alias Person =
-    { id : Int
+    { id : PersonId
     , name : String
     , gender : Gender
+    , parentId : Maybe PersonId
+    , spouseId : Maybe PersonId
     }
 
 
