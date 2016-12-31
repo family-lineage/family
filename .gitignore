@@ -1,0 +1,15 @@
+*node_modules
+.idea
+coverage
+docs
+dist
+dist-test
+local_modules_dist
+tmp
+.vscode
+lib
+npm-debug.log
+elm-stuff
+.DS_Store
+bundle.js
+Junk.elm
