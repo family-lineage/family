@@ -33,3 +33,14 @@ initialModel =
     , personName = ""
     , personGender = Male
     }
+
+
+newPerson : Model -> Person
+newPerson model =
+    { id = List.length model.people
+    , name = model.personName
+    , gender = model.personGender
+    , fatherId = Nothing
+    , motherId = Nothing
+    , spouseId = Nothing
+    }
