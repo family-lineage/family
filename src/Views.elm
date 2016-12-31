@@ -2,7 +2,7 @@ module Views exposing (..)
 
 import Html exposing (Html, div, text, label, input, span, button, h1, p)
 import Html.Attributes exposing (type_, name, placeholder, value)
-import Html.Events exposing (onClick, onSubmit)
+import Html.Events exposing (onClick, onSubmit, onInput)
 import Messages exposing (Msg(..))
 import Models exposing (Model)
 
@@ -15,6 +15,7 @@ formView model =
         , p [] [ text (toString model) ]
         ]
 
+
 personForm : Model -> Html Msg
 personForm model =
     Html.form [ onSubmit Save ]
@@ -25,14 +26,15 @@ personForm model =
                     [ type_ "text"
                     , placeholder "Input name here"
                     , value model.personName
+                    , onInput ChangePersonName
                     ]
                     []
                 ]
             , div []
                 [ label [] [ text "Gender" ]
                 , div []
-                    [ radio "Male" NoOp
-                    , radio "Female" NoOp
+                    [ radio "Male" (ChangePersonGender Models.Male)
+                    , radio "Female" (ChangePersonGender Models.Female)
                     ]
                 ]
             , div []

@@ -10,6 +10,12 @@ update msg model =
         Save ->
             savePerson model
 
+        ChangePersonName name ->
+            { model | personName = name }
+
+        ChangePersonGender gender ->
+            { model | personGender = gender }
+
         _ ->
             model
 
