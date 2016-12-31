@@ -1,7 +1,7 @@
 'use strict';
 
 // custom css
-require('./style.scss');
+require('./style.css');
 
 // Require index.html so it gets copied to dist
 require('./index.html');
