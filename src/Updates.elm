@@ -1,7 +1,7 @@
 module Updates exposing (update)
 
 import Messages exposing (Msg(..))
-import Models exposing (Model, Person)
+import Models exposing (Model, Person, newPerson)
 
 
 update : Msg -> Model -> Model
@@ -24,7 +24,7 @@ savePerson : Model -> Model
 savePerson model =
     let
         person =
-            Person (List.length model.people) model.personName model.personGender Nothing Nothing Nothing
+            newPerson model
 
         newPeople =
             person :: model.people
