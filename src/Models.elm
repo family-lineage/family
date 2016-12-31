@@ -11,3 +11,18 @@ type alias Person =
 type Gender
     = Male
     | Female
+
+
+type alias Model =
+    { people : List Person
+    , personName : String
+    , personGender : Gender
+    }
+
+
+initialModel : Model
+initialModel =
+    { people = []
+    , personName = ""
+    , personGender = Male
+    }
