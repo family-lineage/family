@@ -1,0 +1,1 @@
+client: npm run dev
