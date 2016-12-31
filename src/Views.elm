@@ -1,10 +1,10 @@
 module Views exposing (..)
 
 import Html exposing (Html, div, text, label, input, span, button, h1, p)
-import Html.Attributes exposing (type_, name, placeholder, value)
+import Html.Attributes exposing (type_, name, placeholder, value, checked)
 import Html.Events exposing (onClick, onSubmit, onInput)
 import Messages exposing (Msg(..))
-import Models exposing (Model)
+import Models exposing (Model, Gender)
 
 
 formView : Model -> Html Msg
@@ -33,8 +33,8 @@ personForm model =
             , div []
                 [ label [] [ text "Gender" ]
                 , div []
-                    [ radio "Male" (ChangePersonGender Models.Male)
-                    , radio "Female" (ChangePersonGender Models.Female)
+                    [ radio "Male" model.personGender Models.Male
+                    , radio "Female" model.personGender Models.Female
                     ]
                 ]
             , div []
@@ -44,13 +44,14 @@ personForm model =
         ]
 
 
-radio : String -> Msg -> Html Msg
-radio fieldLabel message =
+radio : String -> Gender -> Gender -> Html Msg
+radio fieldLabel personGender gender =
     label []
         [ input
             [ type_ "radio"
             , name "gender"
-            , onClick message
+            , onClick (ChangePersonGender gender)
+            , checked (personGender == gender)
             ]
             []
         , span [] [ text fieldLabel ]
