@@ -1,10 +1,27 @@
 module Main exposing (..)
 
-import Views exposing (formView)
-import Html exposing (Html)
+import Html exposing (Html, program)
 import Messages exposing (Msg(..))
+import Models exposing (Model, initialModel)
+import Updates exposing (update)
+import Views exposing (view)
 
 
-main : Html Msg
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
+
+
+init : ( Model, Cmd Msg )
+init =
+    ( initialModel, Cmd.none )
+
+
+main : Program Never Model Msg
 main =
-    formView
+    program
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }
