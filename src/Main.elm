@@ -1,7 +1,10 @@
 module Main exposing (..)
 
-import Html exposing (text)
+import Views exposing (formView)
+import Html exposing (Html)
+import Messages exposing (Msg(..))
 
 
+main : Html Msg
 main =
-  text "Hello world!"
+    formView
