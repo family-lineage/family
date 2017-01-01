@@ -37,7 +37,7 @@ initialModel =
     , personName = ""
     , personGender = Male
     , isYourself = False
-    , mdl = Material.Model
+    , mdl = Material.model
     }
 
 
