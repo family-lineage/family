@@ -45,7 +45,7 @@ personForm model =
             ]
         ]
 
-checkbox : msg -> String -> Html msg
+checkbox : Msg -> String -> Html Msg
 checkbox msg name =
   label []
     [ input [ type_ "checkbox", onClick msg ] []
