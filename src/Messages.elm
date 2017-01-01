@@ -1,7 +1,7 @@
 module Messages exposing (..)
 
 import Models exposing (Gender)
-
+import Material
 
 type Msg
     = NoOp
@@ -9,3 +9,4 @@ type Msg
     | ChangePersonGender Gender
     | ToggleIsYourself
     | Save
+    | Mdl (Material.Msg Msg)

@@ -3,8 +3,6 @@ module Views exposing (..)
 import Html exposing (Html, div, text, label, input, span, button, h1, p)
 import Html.Attributes exposing (type_, name, placeholder, value, checked, style)
 import Html.Events exposing (onClick, onSubmit, onInput)
-import Material
-import Material.Scheme
 import Material.Layout as Layout
 
 import Messages exposing (Msg(..))
@@ -14,8 +12,7 @@ import Models exposing (Model, Gender)
 formView : Model -> Html Msg
 formView model =
     div []
-        [ h1 [] [ text "Family Tree" ]
-        , personForm model
+        [ personForm model
         , p [] [ text (toString model) ]
         ]
 
@@ -77,7 +74,7 @@ view model =
         model.mdl
         [ Layout.fixedHeader
         ]
-        { header = [ h1 [ style [ ( "padding", "2rem" ) ] ] [ text "Counter" ] ]
+        { header = [ h1 [ style [ ( "padding", "2rem" ) ] ] [ text "Family Tree" ] ]
         , drawer = []
         , tabs = ( [], [] )
         , main = [ formView model ]
