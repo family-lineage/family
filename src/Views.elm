@@ -3,6 +3,7 @@ module Views exposing (..)
 import Html exposing (Html, div, text, label, input, span, button, h1, p)
 import Html.Attributes exposing (type_, name, placeholder, value, checked, style)
 import Html.Events exposing (onClick, onSubmit, onInput)
+import Material.Scheme
 import Material.Layout as Layout
 
 import Messages exposing (Msg(..))
@@ -79,3 +80,4 @@ view model =
         , tabs = ( [], [] )
         , main = [ formView model ]
         }
+        |> Material.Scheme.top
