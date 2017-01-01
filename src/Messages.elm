@@ -7,4 +7,5 @@ type Msg
     = NoOp
     | ChangePersonName String
     | ChangePersonGender Gender
+    | ToggleIsYourself
     | Save

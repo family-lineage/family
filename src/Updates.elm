@@ -16,6 +16,9 @@ update msg model =
         ChangePersonGender gender ->
             { model | personGender = gender }
 
+        ToggleIsYourself ->
+            { model | isYourself = not model.isYourself }
+
         _ ->
             model
 

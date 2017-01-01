@@ -38,10 +38,19 @@ personForm model =
                     ]
                 ]
             , div []
+                [ checkbox ToggleIsYourself "Is this you?" ]
+            , div []
                 [ button [] [ text "Save" ]
                 ]
             ]
         ]
+
+checkbox : msg -> String -> Html msg
+checkbox msg name =
+  label []
+    [ input [ type_ "checkbox", onClick msg ] []
+    , text name
+    ]
 
 
 radio : String -> Gender -> Gender -> Html Msg

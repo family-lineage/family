@@ -12,6 +12,7 @@ type alias Person =
     , fatherId : Maybe PersonId
     , motherId : Maybe PersonId
     , spouseId : Maybe PersonId
+    , isYourself: Bool
     }
 
 
@@ -24,6 +25,7 @@ type alias Model =
     { people : List Person
     , personName : String
     , personGender : Gender
+    , isYourself : Bool
     }
 
 
@@ -32,6 +34,7 @@ initialModel =
     { people = []
     , personName = ""
     , personGender = Male
+    , isYourself = False
     }
 
 
@@ -43,4 +46,5 @@ newPerson model =
     , fatherId = Nothing
     , motherId = Nothing
     , spouseId = Nothing
+    , isYourself = model.isYourself
     }
