@@ -1,8 +1,12 @@
 module Views exposing (..)
 
 import Html exposing (Html, div, text, label, input, span, button, h1, p)
-import Html.Attributes exposing (type_, name, placeholder, value, checked)
+import Html.Attributes exposing (type_, name, placeholder, value, checked, style)
 import Html.Events exposing (onClick, onSubmit, onInput)
+import Material
+import Material.Scheme
+import Material.Layout as Layout
+
 import Messages exposing (Msg(..))
 import Models exposing (Model, Gender)
 
@@ -69,4 +73,12 @@ radio fieldLabel personGender gender =
 
 view : Model -> Html Msg
 view model =
-    formView model
+    Layout.render Mdl
+        model.mdl
+        [ Layout.fixedHeader
+        ]
+        { header = [ h1 [ style [ ( "padding", "2rem" ) ] ] [ text "Counter" ] ]
+        , drawer = []
+        , tabs = ( [], [] )
+        , main = [ formView model ]
+        }
