@@ -7,10 +7,21 @@ import Updates exposing (update)
 import Views exposing (view)
 
 
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
+
+
+init : ( Model, Cmd Msg )
+init =
+    ( initialModel, Cmd.none )
+
+
 main : Program Never Model Msg
 main =
-    beginnerProgram
-        { model = initialModel
+    Html.program
+        { init = init
         , view = view
         , update = update
+        , subscriptions = subscriptions
         }

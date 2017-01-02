@@ -1,5 +1,6 @@
 module Models exposing (..)
 
+import Material
 
 type alias PersonId =
     Int
@@ -26,6 +27,7 @@ type alias Model =
     , personName : String
     , personGender : Gender
     , isYourself : Bool
+    , mdl : Material.Model
     }
 
 
@@ -35,6 +37,7 @@ initialModel =
     , personName = ""
     , personGender = Male
     , isYourself = False
+    , mdl = Material.model
     }
 
 

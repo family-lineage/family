@@ -1,18 +1,27 @@
 module Views exposing (..)
 
-import Html exposing (Html, div, text, label, input, span, button, h1, p)
-import Html.Attributes exposing (type_, name, placeholder, value, checked)
+import Html exposing (Html, div, text, label, input, span, button, h2, p)
+import Html.Attributes exposing (type_, name, placeholder, value, checked, style)
 import Html.Events exposing (onClick, onSubmit, onInput)
+import Material.Scheme
+import Material.Layout as Layout
+import Material.Grid exposing (grid, cell, size, Device(..))
+
 import Messages exposing (Msg(..))
 import Models exposing (Model, Gender)
 
 
 formView : Model -> Html Msg
 formView model =
-    div []
-        [ h1 [] [ text "Family Tree" ]
-        , personForm model
-        , p [] [ text (toString model) ]
+    grid []
+        [ cell
+            [ size Tablet 6
+            , size Desktop 12
+            , size Phone 2
+            ]
+            [ personForm model
+            , p [] [ text (toString model) ]
+            ]
         ]
 
 
@@ -69,4 +78,13 @@ radio fieldLabel personGender gender =
 
 view : Model -> Html Msg
 view model =
-    formView model
+    Layout.render Mdl
+        model.mdl
+        [ Layout.fixedHeader
+        ]
+        { header = [ h2 [ style [ ( "padding", "2rem" ) ] ] [ text "Family Tree" ] ]
+        , drawer = []
+        , tabs = ( [], [] )
+        , main = [ formView model ]
+        }
+        |> Material.Scheme.top
