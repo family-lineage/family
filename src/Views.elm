@@ -7,6 +7,7 @@ import Html.Events exposing (onClick, onSubmit, onInput)
 import Material.Grid exposing (grid, cell, size, Device(..))
 import Material.Layout as Layout
 import Material.Textfield as Textfield
+import Material.Button as Button
 import Material.Toggles as Toggles
 import Material.Options as Options
 import Material.Scheme
@@ -40,15 +41,23 @@ personForm model =
             , div []
                 [ label [] [ text "Gender" ]
                 , div []
-                    [ radio "Male" model.personGender Models.Male
-                    , radio "Female" model.personGender Models.Female
+                    [ radio2 "Gender" "Male" 0 model Models.Male
+                    , radio2 "Gender" "Female" 1 model Models.Female
                     ]
+                -- , div []
+                --     [ radio "Male" model.personGender Models.Male
+                --     , radio "Female" model.personGender Models.Female
+                --     ]
                 ]
+            , p [] [ text "pemisah" ]
             , div []
                 [ checkbox ToggleIsPersonSelf model "Is this you?" ]
-            , div []
-                [ button [] [ text "Save" ]
+            , Button.render Mdl [ 0 ] model.mdl
+                [ Button.raised
+                , Button.colored
+                , Button.ripple
                 ]
+                [ text "Save" ]
             ]
         ]
 
@@ -73,6 +82,17 @@ checkbox msg model name =
         , Toggles.value model.isPersonSelf
         ]
         [ text name ]
+
+
+radio2 : String -> String -> Int -> Model -> Gender -> Html Msg
+radio2 radioGroup fieldLabel counter model gender =
+    Toggles.radio Mdl [counter] model.mdl
+        [ Toggles.value (model.personGender == gender)
+        , Toggles.group radioGroup
+        , Toggles.ripple
+        , Options.onToggle (ChangePersonGender gender)
+        ]
+        [ text fieldLabel ]
 
 
 radio : String -> Gender -> Gender -> Html Msg
