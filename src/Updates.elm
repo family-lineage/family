@@ -22,7 +22,10 @@ update msg model =
             )
 
         ChangePersonName name ->
-            ( { model | personName = name }
+            ( { model
+                | personName = name
+                , isFormValid = not (String.isEmpty name)
+              }
             , Cmd.none
             )
 
