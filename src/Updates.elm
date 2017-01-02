@@ -1,14 +1,25 @@
 module Updates exposing (update)
 
-import Messages exposing (Msg(..))
-import Models exposing (Model, Person, newPerson)
 import Material
+import Messages exposing (Msg(..))
+import Models exposing (Model, Person, newPerson, PersonId)
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Save ->
             savePerson model
+
+        UpdatePerson person ->
+            ( { model
+                | personId = Just person.id
+                , personName = person.name
+                , personGender = person.gender
+                , isPersonSelf = person.isPersonSelf
+              }
+            , Cmd.none
+            )
 
         ChangePersonName name ->
             ( { model | personName = name }
@@ -20,8 +31,8 @@ update msg model =
             , Cmd.none
             )
 
-        ToggleIsYourself ->
-            ( { model | isYourself = not model.isYourself }
+        ToggleIsPersonSelf ->
+            ( { model | isPersonSelf = not model.isPersonSelf }
             , Cmd.none
             )
 
@@ -34,16 +45,34 @@ update msg model =
 
 savePerson : Model -> ( Model, Cmd Msg )
 savePerson model =
-    let
-        person =
-            newPerson model
+    case model.personId of
+        Just personId ->
+            let
+                updatePerson existingPerson =
+                    if personId == existingPerson.id then
+                        { existingPerson
+                            | name = model.personName
+                            , gender = model.personGender
+                            , isPersonSelf = model.isPersonSelf
+                        }
+                    else
+                        existingPerson
+            in
+                ( { model
+                    | people = List.map updatePerson model.people
+                    , personId = Nothing
+                    , personName = ""
+                    , isPersonSelf = False
+                  }
+                , Cmd.none
+                )
 
-        newPeople =
-            person :: model.people
-    in
-        ( { model
-            | people = newPeople
-            , personName = ""
-        }
-        , Cmd.none
-        )
+        Nothing ->
+            ( { model
+                | people = newPerson model :: model.people
+                , personId = Nothing
+                , personName = ""
+                , isPersonSelf = False
+              }
+            , Cmd.none
+            )
