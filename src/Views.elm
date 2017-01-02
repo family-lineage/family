@@ -7,6 +7,7 @@ import Html.Events exposing (onClick, onSubmit, onInput)
 import Material.Grid exposing (grid, cell, size, Device(..))
 import Material.Layout as Layout
 import Material.Textfield as Textfield
+import Material.Toggles as Toggles
 import Material.Options as Options
 import Material.Scheme
 
@@ -44,7 +45,7 @@ personForm model =
                     ]
                 ]
             , div []
-                [ checkbox ToggleIsPersonSelf "Is this you?" ]
+                [ checkbox ToggleIsPersonSelf model "Is this you?" ]
             , div []
                 [ button [] [ text "Save" ]
                 ]
@@ -64,12 +65,14 @@ name model =
         []
 
 
-checkbox : Msg -> String -> Html Msg
-checkbox msg name =
-    label []
-        [ input [ type_ "checkbox", onClick msg ] []
-        , text name
+checkbox : Msg -> Model -> String -> Html Msg
+checkbox msg model name =
+    Toggles.checkbox Mdl [0] model.mdl
+        [ Options.onToggle msg
+        , Toggles.ripple
+        , Toggles.value model.isPersonSelf
         ]
+        [ text name ]
 
 
 radio : String -> Gender -> Gender -> Html Msg
