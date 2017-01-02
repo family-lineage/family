@@ -1,13 +1,13 @@
 module Views exposing (..)
 
-import Html exposing (Html, div, text, label, input, span, button, h2, p)
+import Html exposing (Html, div, text, label, input, span, button, h2, p, hr)
 import Html.Attributes exposing (type_, name, placeholder, value, checked, style)
 import Html.Events exposing (onClick, onSubmit, onInput)
 import Material.Grid exposing (grid, cell, size, Device(..))
 import Material.Layout as Layout
 import Material.Scheme
 import Messages exposing (Msg(..))
-import Models exposing (Model, Gender)
+import Models exposing (Model, Gender, Person)
 
 
 formView : Model -> Html Msg
@@ -19,6 +19,9 @@ formView model =
             , size Phone 2
             ]
             [ personForm model
+            , hr [] []
+            , peopleView model.people
+            , hr [] []
             , p [] [ text (toString model) ]
             ]
         ]
@@ -74,6 +77,19 @@ radio fieldLabel personGender gender =
             []
         , span [] [ text fieldLabel ]
         ]
+
+
+personView : Person -> Html Msg
+personView person =
+    div [ onClick (UpdatePerson person) ]
+        [ text (person.name ++ " (click to edit)")
+        ]
+
+
+peopleView : List Person -> Html Msg
+peopleView people =
+    div []
+        (List.map personView people)
 
 
 view : Model -> Html Msg
