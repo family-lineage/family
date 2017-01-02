@@ -21,8 +21,8 @@ update msg model =
             , Cmd.none
             )
 
-        ToggleIsYourself ->
-            ( { model | isYourself = not model.isYourself }
+        ToggleIsPersonSelf ->
+            ( { model | isPersonSelf = not model.isPersonSelf }
             , Cmd.none
             )
 

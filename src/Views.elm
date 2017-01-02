@@ -46,7 +46,7 @@ personForm model =
                     ]
                 ]
             , div []
-                [ checkbox ToggleIsYourself "Is this you?" ]
+                [ checkbox ToggleIsPersonSelf "Is this you?" ]
             , div []
                 [ button [] [ text "Save" ]
                 ]

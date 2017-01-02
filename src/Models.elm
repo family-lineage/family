@@ -14,7 +14,7 @@ type alias Person =
     , fatherId : Maybe PersonId
     , motherId : Maybe PersonId
     , spouseId : Maybe PersonId
-    , isYourself : Bool
+    , isPersonSelf : Bool
     }
 
 
@@ -27,7 +27,7 @@ type alias Model =
     { people : List Person
     , personName : String
     , personGender : Gender
-    , isYourself : Bool
+    , isPersonSelf : Bool
     , mdl : Material.Model
     }
 
@@ -37,7 +37,7 @@ initialModel =
     { people = []
     , personName = ""
     , personGender = Male
-    , isYourself = False
+    , isPersonSelf = False
     , mdl = Material.model
     }
 
@@ -50,5 +50,5 @@ newPerson model =
     , fatherId = Nothing
     , motherId = Nothing
     , spouseId = Nothing
-    , isYourself = model.isYourself
+    , isPersonSelf = model.isPersonSelf
     }

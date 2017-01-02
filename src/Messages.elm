@@ -8,6 +8,6 @@ type Msg
     = NoOp
     | ChangePersonName String
     | ChangePersonGender Gender
-    | ToggleIsYourself
+    | ToggleIsPersonSelf
     | Save
     | Mdl (Material.Msg Msg)
