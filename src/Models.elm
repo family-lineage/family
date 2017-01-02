@@ -29,6 +29,7 @@ type alias Model =
     , personName : String
     , personGender : Gender
     , isPersonSelf : Bool
+    , isFormValid : Bool
     , mdl : Material.Model
     }
 
@@ -40,6 +41,7 @@ initialModel =
     , personName = ""
     , personGender = Male
     , isPersonSelf = False
+    , isFormValid = False
     , mdl = Material.model
     }
 
