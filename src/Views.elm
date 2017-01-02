@@ -5,6 +5,8 @@ import Html.Attributes exposing (type_, name, placeholder, value, checked, style
 import Html.Events exposing (onClick, onSubmit, onInput)
 import Material.Scheme
 import Material.Layout as Layout
+import Material.Textfield as Textfield
+import Material.Options as Options
 import Material.Grid exposing (grid, cell, size, Device(..))
 
 import Messages exposing (Msg(..))
@@ -29,16 +31,7 @@ personForm : Model -> Html Msg
 personForm model =
     Html.form [ onSubmit Save ]
         [ div []
-            [ div []
-                [ label [] [ text "Name" ]
-                , input
-                    [ type_ "text"
-                    , placeholder "Input name here"
-                    , value model.personName
-                    , onInput ChangePersonName
-                    ]
-                    []
-                ]
+            [ name model
             , div []
                 [ label [] [ text "Gender" ]
                 , div []
@@ -53,6 +46,19 @@ personForm model =
                 ]
             ]
         ]
+
+
+name : Model -> Html Msg
+name model =
+    Textfield.render Mdl [2] model.mdl
+        [ Textfield.label "Name"
+        , Textfield.floatingLabel
+        , Textfield.text_
+        , Textfield.value model.personName
+        , Options.onInput ChangePersonName
+        ]
+        []
+
 
 checkbox : Msg -> String -> Html Msg
 checkbox msg name =
