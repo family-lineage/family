@@ -48,11 +48,12 @@ personForm model =
             , p [] [ text "pemisah sementara" ]
             , div []
                 [ checkbox ToggleIsPersonSelf model "Is this you?" ]
-            , Button.render Mdl [ 0 ] model.mdl
-                [ Button.raised
-                , Button.colored
-                , Button.ripple
-                ]
+            , Button.render Mdl
+                [ 0 ]
+                model.mdl
+                (buttonAttributes
+                    (not model.isFormValid)
+                )
                 [ text "Save" ]
             ]
         ]
