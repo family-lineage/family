@@ -48,14 +48,32 @@ personForm model =
             , p [] [ text "pemisah sementara" ]
             , div []
                 [ checkbox ToggleIsPersonSelf model "Is this you?" ]
-            , Button.render Mdl [ 0 ] model.mdl
-                [ Button.raised
-                , Button.colored
-                , Button.ripple
-                ]
+            , Button.render Mdl
+                [ 0 ]
+                model.mdl
+                (buttonAttributes
+                    (not model.isFormValid)
+                )
                 [ text "Save" ]
             ]
         ]
+
+
+buttonAttributes : Bool -> List (Button.Property m)
+buttonAttributes isDisabled =
+    if isDisabled then
+        defaultButtonAttributes
+            ++ [ Button.disabled ]
+    else
+        defaultButtonAttributes
+
+
+defaultButtonAttributes : List (Button.Property m)
+defaultButtonAttributes =
+    [ Button.raised
+    , Button.colored
+    , Button.raised
+    ]
 
 
 name : Model -> Html Msg
