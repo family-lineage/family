@@ -14,14 +14,15 @@ import Messages exposing (Msg(..))
 import Models exposing (Model, Gender, Person)
 
 
+row : List (Options.Style a)
+row =
+    [ size Desktop 12, size Tablet 6, size Phone 2 ]
+
+
 formView : Model -> Html Msg
 formView model =
     grid []
-        [ cell
-            [ size Tablet 6
-            , size Desktop 12
-            , size Phone 2
-            ]
+        [ cell row
             [ personForm model
             , hr [] []
             , peopleView model.people
@@ -34,25 +35,27 @@ formView model =
 personForm : Model -> Html Msg
 personForm model =
     Html.form [ onSubmit Save ]
-        [ div []
-            [ namePerson model
-            , div []
-                [ label [] [ text "Gender" ]
-                , div []
-                    [ radio "Gender" "Male" 0 model Models.Male
-                    , radio "Gender" "Female" 1 model Models.Female
-                    ]
+        [ grid []
+            [ cell row
+                [ namePerson model ]
+            , cell row
+                [ label [] [ text "Gender" ] ]
+            , cell row
+                [ radio "Gender" "Male" 2 model Models.Male
+                , radio "Gender" "Female" 3 model Models.Female
                 ]
-            , p [] [ text "pemisah sementara" ]
-            , div []
+            , cell row
                 [ checkbox ToggleIsPersonSelf model "Is this you?" ]
-            , Button.render Mdl
-                [ 0 ]
-                model.mdl
-                (buttonAttributes
-                    (not model.isFormValid)
-                )
-                [ text "Save" ]
+            , cell row
+                [ Button.render
+                    Mdl
+                    [ 5 ]
+                    model.mdl
+                    (buttonAttributes
+                        (not model.isFormValid)
+                    )
+                    [ text "Save" ]
+                ]
             ]
         ]
 
@@ -78,7 +81,7 @@ namePerson : Model -> Html Msg
 namePerson model =
     Textfield.render
         Mdl
-        [ 2 ]
+        [ 0 ]
         model.mdl
         [ Textfield.label "Name"
         , Textfield.floatingLabel
@@ -92,7 +95,7 @@ namePerson model =
 checkbox : Msg -> Model -> String -> Html Msg
 checkbox msg model name =
     Toggles.checkbox Mdl
-        [ 3 ]
+        [ 4 ]
         model.mdl
         [ Options.onToggle msg
         , Toggles.ripple
