@@ -41,15 +41,11 @@ personForm model =
             , div []
                 [ label [] [ text "Gender" ]
                 , div []
-                    [ radio2 "Gender" "Male" 0 model Models.Male
-                    , radio2 "Gender" "Female" 1 model Models.Female
+                    [ radio "Gender" "Male" 0 model Models.Male
+                    , radio "Gender" "Female" 1 model Models.Female
                     ]
-                -- , div []
-                --     [ radio "Male" model.personGender Models.Male
-                --     , radio "Female" model.personGender Models.Female
-                --     ]
                 ]
-            , p [] [ text "pemisah" ]
+            , p [] [ text "pemisah sementara" ]
             , div []
                 [ checkbox ToggleIsPersonSelf model "Is this you?" ]
             , Button.render Mdl [ 0 ] model.mdl
@@ -76,7 +72,7 @@ name model =
 
 checkbox : Msg -> Model -> String -> Html Msg
 checkbox msg model name =
-    Toggles.checkbox Mdl [0] model.mdl
+    Toggles.checkbox Mdl [3] model.mdl
         [ Options.onToggle msg
         , Toggles.ripple
         , Toggles.value model.isPersonSelf
@@ -84,8 +80,8 @@ checkbox msg model name =
         [ text name ]
 
 
-radio2 : String -> String -> Int -> Model -> Gender -> Html Msg
-radio2 radioGroup fieldLabel counter model gender =
+radio : String -> String -> Int -> Model -> Gender -> Html Msg
+radio radioGroup fieldLabel counter model gender =
     Toggles.radio Mdl [counter] model.mdl
         [ Toggles.value (model.personGender == gender)
         , Toggles.group radioGroup
@@ -93,19 +89,6 @@ radio2 radioGroup fieldLabel counter model gender =
         , Options.onToggle (ChangePersonGender gender)
         ]
         [ text fieldLabel ]
-
-
-radio : String -> Gender -> Gender -> Html Msg
-radio fieldLabel personGender gender =
-    label []
-        [ input
-            [ type_ "radio"
-            , onClick (ChangePersonGender gender)
-            , checked (personGender == gender)
-            ]
-            []
-        , span [] [ text fieldLabel ]
-        ]
 
 
 personView : Person -> Html Msg
