@@ -25,6 +25,7 @@ type Gender
 
 type alias Model =
     { people : List Person
+    , personId : Maybe Int
     , personName : String
     , personGender : Gender
     , isPersonSelf : Bool
@@ -35,6 +36,7 @@ type alias Model =
 initialModel : Model
 initialModel =
     { people = []
+    , personId = Nothing
     , personName = ""
     , personGender = Male
     , isPersonSelf = False

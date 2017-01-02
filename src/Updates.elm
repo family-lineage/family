@@ -2,7 +2,7 @@ module Updates exposing (update)
 
 import Material
 import Messages exposing (Msg(..))
-import Models exposing (Model, Person, newPerson)
+import Models exposing (Model, Person, newPerson, PersonId)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -10,6 +10,11 @@ update msg model =
     case msg of
         Save ->
             savePerson model
+
+        ChangePersonId personId ->
+            ( { model | personId = personId }
+            , Cmd.none
+            )
 
         ChangePersonName name ->
             ( { model | personName = name }
@@ -44,6 +49,7 @@ savePerson model =
     in
         ( { model
             | people = newPeople
+            , personId = Nothing
             , personName = ""
           }
         , Cmd.none
