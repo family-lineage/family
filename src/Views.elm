@@ -3,7 +3,6 @@ module Views exposing (..)
 import Html exposing (Html, div, text, label, h2, p, hr)
 import Html.Attributes exposing (style)
 import Html.Events exposing (onClick, onSubmit)
-
 import Material.Grid exposing (grid, cell, size, Device(..))
 import Material.Layout as Layout
 import Material.Textfield as Textfield
@@ -11,7 +10,6 @@ import Material.Button as Button
 import Material.Toggles as Toggles
 import Material.Options as Options
 import Material.Scheme
-
 import Messages exposing (Msg(..))
 import Models exposing (Model, Gender, Person)
 
@@ -37,7 +35,7 @@ personForm : Model -> Html Msg
 personForm model =
     Html.form [ onSubmit Save ]
         [ div []
-            [ name model
+            [ namePerson model
             , div []
                 [ label [] [ text "Gender" ]
                 , div []
@@ -76,9 +74,12 @@ defaultButtonAttributes =
     ]
 
 
-name : Model -> Html Msg
-name model =
-    Textfield.render Mdl [2] model.mdl
+namePerson : Model -> Html Msg
+namePerson model =
+    Textfield.render
+        Mdl
+        [ 2 ]
+        model.mdl
         [ Textfield.label "Name"
         , Textfield.floatingLabel
         , Textfield.text_
@@ -90,7 +91,9 @@ name model =
 
 checkbox : Msg -> Model -> String -> Html Msg
 checkbox msg model name =
-    Toggles.checkbox Mdl [3] model.mdl
+    Toggles.checkbox Mdl
+        [ 3 ]
+        model.mdl
         [ Options.onToggle msg
         , Toggles.ripple
         , Toggles.value model.isPersonSelf
@@ -100,7 +103,9 @@ checkbox msg model name =
 
 radio : String -> String -> Int -> Model -> Gender -> Html Msg
 radio radioGroup fieldLabel counter model gender =
-    Toggles.radio Mdl [counter] model.mdl
+    Toggles.radio Mdl
+        [ counter ]
+        model.mdl
         [ Toggles.value (model.personGender == gender)
         , Toggles.group radioGroup
         , Toggles.ripple
