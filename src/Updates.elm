@@ -62,6 +62,7 @@ savePerson model =
                     | people = List.map updatePerson model.people
                     , personId = Nothing
                     , personName = ""
+                    , personNameError = Nothing
                     , isPersonSelf = False
                   }
                 , Cmd.none
