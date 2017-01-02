@@ -73,7 +73,6 @@ radio fieldLabel personGender gender =
     label []
         [ input
             [ type_ "radio"
-            , name "gender"
             , onClick (ChangePersonGender gender)
             , checked (personGender == gender)
             ]
