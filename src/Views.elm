@@ -62,16 +62,18 @@ personForm model =
 buttonAttributes : Bool -> List (Button.Property m)
 buttonAttributes isDisabled =
     if isDisabled then
-        [ Button.raised
-        , Button.colored
-        , Button.raised
-        , Button.disabled
-        ]
+        defaultButtonAttributes
+            ++ [ Button.disabled ]
     else
-        [ Button.raised
-        , Button.colored
-        , Button.raised
-        ]
+        defaultButtonAttributes
+
+
+defaultButtonAttributes : List (Button.Property m)
+defaultButtonAttributes =
+    [ Button.raised
+    , Button.colored
+    , Button.raised
+    ]
 
 
 name : Model -> Html Msg
