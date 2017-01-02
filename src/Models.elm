@@ -2,6 +2,7 @@ module Models exposing (..)
 
 import Material
 
+
 type alias PersonId =
     Int
 
@@ -13,7 +14,7 @@ type alias Person =
     , fatherId : Maybe PersonId
     , motherId : Maybe PersonId
     , spouseId : Maybe PersonId
-    , isYourself: Bool
+    , isPersonSelf : Bool
     }
 
 
@@ -24,9 +25,10 @@ type Gender
 
 type alias Model =
     { people : List Person
+    , personId : Maybe Int
     , personName : String
     , personGender : Gender
-    , isYourself : Bool
+    , isPersonSelf : Bool
     , mdl : Material.Model
     }
 
@@ -34,9 +36,10 @@ type alias Model =
 initialModel : Model
 initialModel =
     { people = []
+    , personId = Nothing
     , personName = ""
     , personGender = Male
-    , isYourself = False
+    , isPersonSelf = False
     , mdl = Material.model
     }
 
@@ -49,5 +52,5 @@ newPerson model =
     , fatherId = Nothing
     , motherId = Nothing
     , spouseId = Nothing
-    , isYourself = model.isYourself
+    , isPersonSelf = model.isPersonSelf
     }

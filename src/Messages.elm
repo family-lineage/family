@@ -1,12 +1,14 @@
 module Messages exposing (..)
 
-import Models exposing (Gender)
 import Material
+import Models exposing (Gender, PersonId, Person)
+
 
 type Msg
     = NoOp
+    | UpdatePerson Person
     | ChangePersonName String
     | ChangePersonGender Gender
-    | ToggleIsYourself
+    | ToggleIsPersonSelf
     | Save
     | Mdl (Material.Msg Msg)
