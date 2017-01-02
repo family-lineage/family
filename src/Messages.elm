@@ -1,7 +1,8 @@
 module Messages exposing (..)
 
-import Models exposing (Gender)
 import Material
+import Models exposing (Gender)
+
 
 type Msg
     = NoOp

@@ -1,8 +1,9 @@
 module Updates exposing (update)
 
+import Material
 import Messages exposing (Msg(..))
 import Models exposing (Model, Person, newPerson)
-import Material
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -44,6 +45,6 @@ savePerson model =
         ( { model
             | people = newPeople
             , personName = ""
-        }
+          }
         , Cmd.none
         )

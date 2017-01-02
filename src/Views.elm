@@ -3,10 +3,9 @@ module Views exposing (..)
 import Html exposing (Html, div, text, label, input, span, button, h2, p)
 import Html.Attributes exposing (type_, name, placeholder, value, checked, style)
 import Html.Events exposing (onClick, onSubmit, onInput)
-import Material.Scheme
-import Material.Layout as Layout
 import Material.Grid exposing (grid, cell, size, Device(..))
-
+import Material.Layout as Layout
+import Material.Scheme
 import Messages exposing (Msg(..))
 import Models exposing (Model, Gender)
 
@@ -54,12 +53,13 @@ personForm model =
             ]
         ]
 
+
 checkbox : Msg -> String -> Html Msg
 checkbox msg name =
-  label []
-    [ input [ type_ "checkbox", onClick msg ] []
-    , text name
-    ]
+    label []
+        [ input [ type_ "checkbox", onClick msg ] []
+        , text name
+        ]
 
 
 radio : String -> Gender -> Gender -> Html Msg

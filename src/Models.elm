@@ -2,6 +2,7 @@ module Models exposing (..)
 
 import Material
 
+
 type alias PersonId =
     Int
 
@@ -13,7 +14,7 @@ type alias Person =
     , fatherId : Maybe PersonId
     , motherId : Maybe PersonId
     , spouseId : Maybe PersonId
-    , isYourself: Bool
+    , isYourself : Bool
     }
 
 
