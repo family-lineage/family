@@ -21,11 +21,6 @@ update msg model =
             , Cmd.none
             )
 
-        ChangePersonId personId ->
-            ( { model | personId = personId }
-            , Cmd.none
-            )
-
         ChangePersonName name ->
             ( { model | personName = name }
             , Cmd.none
