@@ -11,6 +11,16 @@ update msg model =
         Save ->
             savePerson model
 
+        UpdatePerson person ->
+            ( { model
+                | personId = Just person.id
+                , personName = person.name
+                , personGender = person.gender
+                , isPersonSelf = person.isPersonSelf
+              }
+            , Cmd.none
+            )
+
         ChangePersonId personId ->
             ( { model | personId = personId }
             , Cmd.none
@@ -40,17 +50,34 @@ update msg model =
 
 savePerson : Model -> ( Model, Cmd Msg )
 savePerson model =
-    let
-        person =
-            newPerson model
+    case model.personId of
+        Just personId ->
+            let
+                updatePerson existingPerson =
+                    if personId == existingPerson.id then
+                        { existingPerson
+                            | name = model.personName
+                            , gender = model.personGender
+                            , isPersonSelf = model.isPersonSelf
+                        }
+                    else
+                        existingPerson
+            in
+                ( { model
+                    | people = List.map updatePerson model.people
+                    , personId = Nothing
+                    , personName = ""
+                    , isPersonSelf = False
+                  }
+                , Cmd.none
+                )
 
-        newPeople =
-            person :: model.people
-    in
-        ( { model
-            | people = newPeople
-            , personId = Nothing
-            , personName = ""
-          }
-        , Cmd.none
-        )
+        Nothing ->
+            ( { model
+                | people = newPerson model :: model.people
+                , personId = Nothing
+                , personName = ""
+                , isPersonSelf = False
+              }
+            , Cmd.none
+            )
