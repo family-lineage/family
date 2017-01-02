@@ -1,6 +1,6 @@
 module Views exposing (..)
 
-import Html exposing (Html, div, text, label, h2, p, hr)
+import Html exposing (Html, div, text, label, h2, p, hr, span)
 import Html.Attributes exposing (style)
 import Html.Events exposing (onClick, onSubmit)
 import Material.Grid exposing (grid, cell, size, Device(..))
@@ -37,11 +37,14 @@ personForm model =
     Html.form [ onSubmit Save ]
         [ grid []
             [ cell row
+                [ label [] [ text "Name" ] ]
+            , cell row
                 [ namePerson model ]
             , cell row
                 [ label [] [ text "Gender" ] ]
             , cell row
                 [ radio "Gender" "Male" 2 model Models.Male
+                , span [ style [ ( "margin-left", "2rem" ) ] ] []
                 , radio "Gender" "Female" 3 model Models.Female
                 ]
             , cell row
@@ -83,8 +86,7 @@ namePerson model =
         Mdl
         [ 0 ]
         model.mdl
-        [ Textfield.label "Name"
-        , Textfield.floatingLabel
+        [ Textfield.label "e.g. Telolet"
         , Textfield.text_
         , Textfield.value model.personName
         , Options.onInput ChangePersonName
