@@ -27,7 +27,6 @@ type alias Model =
     { people : List Person
     , personId : Maybe Int
     , personName : String
-    , personNameError : Maybe String
     , personGender : Gender
     , isPersonSelf : Bool
     , isFormValid : Bool
@@ -40,7 +39,6 @@ initialModel =
     { people = []
     , personId = Nothing
     , personName = ""
-    , personNameError = Nothing
     , personGender = Male
     , isPersonSelf = False
     , isFormValid = False
