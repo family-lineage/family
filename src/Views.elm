@@ -1,8 +1,8 @@
 module Views exposing (..)
 
-import Html exposing (Html, div, text, label, input, span, button, h2, p, hr)
-import Html.Attributes exposing (type_, name, placeholder, value, checked, style)
-import Html.Events exposing (onClick, onSubmit, onInput)
+import Html exposing (Html, div, text, label, h2, p, hr)
+import Html.Attributes exposing (style)
+import Html.Events exposing (onClick, onSubmit)
 
 import Material.Grid exposing (grid, cell, size, Device(..))
 import Material.Layout as Layout
