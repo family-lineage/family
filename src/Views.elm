@@ -58,6 +58,21 @@ personForm model =
         ]
 
 
+buttonAttributes : Bool -> List (Button.Property m)
+buttonAttributes isDisabled =
+    if isDisabled then
+        [ Button.raised
+        , Button.colored
+        , Button.raised
+        , Button.disabled
+        ]
+    else
+        [ Button.raised
+        , Button.colored
+        , Button.raised
+        ]
+
+
 name : Model -> Html Msg
 name model =
     Textfield.render Mdl [2] model.mdl
