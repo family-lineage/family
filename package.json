@@ -19,7 +19,7 @@
     },
     "scripts": {
         "api": "node api.js",
-        "build": "webpack",
+        "build": "webpack -p",
         "watch": "webpack --watch",
         "dev": "webpack-dev-server --port 3000"
     }
