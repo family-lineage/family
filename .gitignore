@@ -2,7 +2,6 @@
 .idea
 coverage
 docs
-dist
 dist-test
 local_modules_dist
 tmp
