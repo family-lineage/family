@@ -7,6 +7,10 @@ type alias PersonId =
     Int
 
 
+type alias People =
+    List Person
+
+
 type alias Person =
     { id : PersonId
     , name : String
@@ -24,8 +28,8 @@ type Gender
 
 
 type alias Model =
-    { people : List Person
     , personId : Maybe Int
+    { people : People
     , personName : String
     , personGender : Gender
     , isPersonSelf : Bool
