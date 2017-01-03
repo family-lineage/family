@@ -16,6 +16,9 @@ update msg model =
                 | personId = Just person.id
                 , personName = person.name
                 , personGender = person.gender
+                , personMother = person.motherId
+                , personFather = person.fatherId
+                , personSpouse = person.spouseId
                 , isPersonSelf = person.isPersonSelf
               }
             , Cmd.none
@@ -57,6 +60,9 @@ savePerson model =
                             | name = model.personName
                             , gender = model.personGender
                             , isPersonSelf = model.isPersonSelf
+                            , motherId = model.personMother
+                            , fatherId = model.personFather
+                            , spouseId = model.personSpouse
                         }
                     else
                         existingPerson
@@ -65,6 +71,9 @@ savePerson model =
                     | people = List.map updatePerson model.people
                     , personId = Nothing
                     , personName = ""
+                    , personMother = Nothing
+                    , personFather = Nothing
+                    , personSpouse = Nothing
                     , isPersonSelf = False
                   }
                 , Cmd.none
@@ -75,6 +84,9 @@ savePerson model =
                 | people = newPerson model :: model.people
                 , personId = Nothing
                 , personName = ""
+                , personMother = Nothing
+                , personFather = Nothing
+                , personSpouse = Nothing
                 , isPersonSelf = False
               }
             , Cmd.none
