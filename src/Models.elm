@@ -92,11 +92,16 @@ femalePeople personId people =
     genderPeople personId Female people
 
 
-getPerson : People -> PersonId -> Maybe Person
-getPerson people personId =
-    people
-        |> List.filter (\person -> person.id == personId)
-        |> List.head
+getPerson : People -> Maybe PersonId -> Maybe Person
+getPerson people maybePersonId =
+    case maybePersonId of
+        Just personId ->
+            people
+                |> List.filter (\person -> person.id == personId)
+                |> List.head
+
+        Nothing ->
+            Nothing
 
 
 personName : Maybe Person -> String
