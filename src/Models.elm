@@ -7,6 +7,10 @@ type alias PersonId =
     Int
 
 
+type alias People =
+    List Person
+
+
 type alias Person =
     { id : PersonId
     , name : String
@@ -24,10 +28,13 @@ type Gender
 
 
 type alias Model =
-    { people : List Person
-    , personId : Maybe Int
+    { people : People
+    , personId : Maybe PersonId
     , personName : String
     , personGender : Gender
+    , personFather : Maybe PersonId
+    , personMother : Maybe PersonId
+    , personSpouse : Maybe PersonId
     , isPersonSelf : Bool
     , isFormValid : Bool
     , mdl : Material.Model
@@ -40,6 +47,9 @@ initialModel =
     , personId = Nothing
     , personName = ""
     , personGender = Male
+    , personFather = Nothing
+    , personMother = Nothing
+    , personSpouse = Nothing
     , isPersonSelf = False
     , isFormValid = False
     , mdl = Material.model
@@ -51,8 +61,61 @@ newPerson model =
     { id = (List.length model.people) + 1
     , name = model.personName
     , gender = model.personGender
-    , fatherId = Nothing
-    , motherId = Nothing
-    , spouseId = Nothing
+    , fatherId = model.personFather
+    , motherId = model.personMother
+    , spouseId = model.personSpouse
     , isPersonSelf = model.isPersonSelf
     }
+
+
+genderPeople : Maybe PersonId -> Gender -> People -> People
+genderPeople personId gender people =
+    let
+        personFilter person =
+            case personId of
+                Just pId ->
+                    person.gender == gender && person.id /= pId
+
+                Nothing ->
+                    person.gender == gender
+    in
+        List.filter personFilter people
+
+
+malePeople : Maybe PersonId -> People -> People
+malePeople personId people =
+    genderPeople personId Male people
+
+
+femalePeople : Maybe PersonId -> People -> People
+femalePeople personId people =
+    genderPeople personId Female people
+
+
+getPerson : People -> Maybe PersonId -> Maybe Person
+getPerson people maybePersonId =
+    case maybePersonId of
+        Just personId ->
+            people
+                |> List.filter (\person -> person.id == personId)
+                |> List.head
+
+        Nothing ->
+            Nothing
+
+
+personName : Maybe Person -> String
+personName maybePerson =
+    case maybePerson of
+        Just person ->
+            person.name
+
+        Nothing ->
+            ""
+
+
+getPersonName : People -> Maybe PersonId -> String
+getPersonName people maybePersonId =
+    maybePersonId
+        |> getPerson people
+        |> personName

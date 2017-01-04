@@ -10,5 +10,8 @@ type Msg
     | ChangePersonName String
     | ChangePersonGender Gender
     | ToggleIsPersonSelf
+    | ChangePersonMother (Maybe PersonId)
+    | ChangePersonFather (Maybe PersonId)
+    | ChangePersonSpouse (Maybe PersonId)
     | Save
     | Mdl (Material.Msg Msg)
