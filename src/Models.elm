@@ -112,3 +112,10 @@ personName maybePerson =
 
         Nothing ->
             ""
+
+
+getPersonName : People -> Maybe PersonId -> String
+getPersonName people maybePersonId =
+    maybePersonId
+        |> getPerson people
+        |> personName
