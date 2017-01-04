@@ -34,7 +34,7 @@ formView model =
 
 personForm : Model -> Html Msg
 personForm model =
-    Html.form [ onSubmit Save ]
+    Html.form []
         [ grid []
             [ cell row
                 [ label [] [ text "Name" ] ]
@@ -54,8 +54,10 @@ personForm model =
                     Mdl
                     [ 5 ]
                     model.mdl
-                    (buttonAttributes
+                    ((buttonAttributes
                         (not model.isFormValid)
+                     )
+                        ++ [ Options.onClick Save ]
                     )
                     [ text "Save" ]
                 ]
