@@ -2,7 +2,7 @@ module Views exposing (..)
 
 import Html exposing (Html, div, text, label, h2, p, hr, span)
 import Html.Attributes exposing (style)
-import Html.Events exposing (onClick, onSubmit)
+import Html.Events exposing (onSubmit)
 import Material.Grid exposing (grid, cell, size, Device(..))
 import Material.Layout as Layout
 import Material.Textfield as Textfield
@@ -11,7 +11,17 @@ import Material.Toggles as Toggles
 import Material.Options as Options
 import Material.Scheme
 import Messages exposing (Msg(..))
-import Models exposing (Model, Gender, Person)
+import Models
+    exposing
+        ( Model
+        , Gender
+        , Person
+        , People
+        , PersonId
+        , malePeople
+        , femalePeople
+        )
+import PersonSelect exposing (peopleSelect)
 import PersonViews exposing (peopleView)
 
 
@@ -35,7 +45,7 @@ formView model =
 
 personForm : Model -> Html Msg
 personForm model =
-    Html.form []
+    Html.form [ onSubmit NoOp ]
         [ grid []
             [ cell row
                 [ label [] [ text "Name" ] ]
@@ -50,6 +60,33 @@ personForm model =
                 ]
             , cell row
                 [ checkbox ToggleIsPersonSelf model "Is this you?" ]
+            , cell row
+                [ label [] [ text "Father" ] ]
+            , cell row
+                [ peopleSelect [ 7, 0 ]
+                    (malePeople model.personId)
+                    model
+                    model.personFather
+                    ChangePersonFather
+                ]
+            , cell row
+                [ label [] [ text "Mother" ] ]
+            , cell row
+                [ peopleSelect [ 8, 0 ]
+                    (femalePeople model.personId)
+                    model
+                    model.personMother
+                    ChangePersonMother
+                ]
+            , cell row
+                [ label [] [ text "Spouse" ] ]
+            , cell row
+                [ peopleSelect [ 9, 0 ]
+                    (\p -> p)
+                    model
+                    model.personSpouse
+                    ChangePersonSpouse
+                ]
             , cell row
                 [ Button.render
                     Mdl
@@ -120,10 +157,6 @@ radio radioGroup fieldLabel counter model gender =
         , Options.onToggle (ChangePersonGender gender)
         ]
         [ text fieldLabel ]
-
-
-
-
 
 
 view : Model -> Html Msg
