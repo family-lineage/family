@@ -66,3 +66,44 @@ newPerson model =
     , spouseId = model.personSpouse
     , isPersonSelf = model.isPersonSelf
     }
+
+
+genderPeople : Maybe PersonId -> Gender -> People -> People
+genderPeople personId gender people =
+    let
+        personFilter person =
+            case personId of
+                Just pId ->
+                    person.gender == gender && person.id /= pId
+
+                Nothing ->
+                    person.gender == gender
+    in
+        List.filter personFilter people
+
+
+malePeople : Maybe PersonId -> People -> People
+malePeople personId people =
+    genderPeople personId Male people
+
+
+femalePeople : Maybe PersonId -> People -> People
+femalePeople personId people =
+    genderPeople personId Female people
+
+
+getPerson : People -> PersonId -> Maybe Person
+getPerson people personId =
+    people
+        |> List.filter (\person -> person.id == personId)
+        |> List.head
+
+
+personName : Maybe Person -> String
+personName maybePerson =
+    case maybePerson of
+        Just person ->
+            person.name
+
+        Nothing ->
+            ""
