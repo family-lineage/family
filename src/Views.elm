@@ -12,6 +12,7 @@ import Material.Options as Options
 import Material.Scheme
 import Messages exposing (Msg(..))
 import Models exposing (Model, Gender, Person)
+import PersonViews exposing (peopleView)
 
 
 row : List (Options.Style a)
@@ -121,17 +122,8 @@ radio radioGroup fieldLabel counter model gender =
         [ text fieldLabel ]
 
 
-personView : Person -> Html Msg
-personView person =
-    div [ onClick (UpdatePerson person) ]
-        [ text (person.name ++ " (click to edit)")
-        ]
 
 
-peopleView : List Person -> Html Msg
-peopleView people =
-    div []
-        (List.map personView people)
 
 
 view : Model -> Html Msg
