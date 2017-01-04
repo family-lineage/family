@@ -47,6 +47,16 @@ update msg model =
             , Cmd.none
             )
 
+        ChangePersonFather fatherId ->
+            ( { model | personFather = fatherId }
+            , Cmd.none
+            )
+
+        ChangePersonSpouse spouseId ->
+            ( { model | personSpouse = spouseId }
+            , Cmd.none
+            )
+
         Mdl msg_ ->
             Material.update Mdl msg_ model
 

@@ -32,8 +32,8 @@ type alias Model =
     , personId : Maybe PersonId
     , personName : String
     , personGender : Gender
-    , personMother : Maybe PersonId
     , personFather : Maybe PersonId
+    , personMother : Maybe PersonId
     , personSpouse : Maybe PersonId
     , isPersonSelf : Bool
     , isFormValid : Bool
@@ -47,8 +47,8 @@ initialModel =
     , personId = Nothing
     , personName = ""
     , personGender = Male
-    , personMother = Nothing
     , personFather = Nothing
+    , personMother = Nothing
     , personSpouse = Nothing
     , isPersonSelf = False
     , isFormValid = False
