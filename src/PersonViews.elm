@@ -47,7 +47,10 @@ relationCell people parentId =
     case parentId of
         Just personId ->
             td [ style tableStyles ]
-                [ text (personName (getPerson people personId))
+                [ personId
+                    |> Just
+                    |> getPersonName people
+                    |> text
                 ]
 
         Nothing ->
