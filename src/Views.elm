@@ -20,6 +20,7 @@ import Models
         , PersonId
         , malePeople
         , femalePeople
+        , getPersonName
         )
 import PersonSelect exposing (peopleSelect)
 import PersonViews exposing (peopleView)
@@ -61,7 +62,13 @@ personForm model =
             , cell row
                 [ checkbox ToggleIsPersonSelf model "Is this you?" ]
             , cell row
-                [ label [] [ text "Father" ] ]
+                [ label []
+                    [ text
+                        ("Father "
+                            ++ getPersonName model.people model.personFather
+                        )
+                    ]
+                ]
             , cell row
                 [ peopleSelect [ 7, 0 ]
                     (malePeople model.personId)
@@ -70,7 +77,13 @@ personForm model =
                     ChangePersonFather
                 ]
             , cell row
-                [ label [] [ text "Mother" ] ]
+                [ label []
+                    [ text
+                        ("Mother "
+                            ++ getPersonName model.people model.personMother
+                        )
+                    ]
+                ]
             , cell row
                 [ peopleSelect [ 8, 0 ]
                     (femalePeople model.personId)
@@ -79,7 +92,13 @@ personForm model =
                     ChangePersonMother
                 ]
             , cell row
-                [ label [] [ text "Spouse" ] ]
+                [ label []
+                    [ text
+                        ("Spouse"
+                            ++ getPersonName model.people model.personSpouse
+                        )
+                    ]
+                ]
             , cell row
                 [ peopleSelect [ 9, 0 ]
                     (\p -> p)
