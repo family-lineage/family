@@ -8,6 +8,9 @@ import Models exposing (Model, Person, newPerson, PersonId)
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        NoOp ->
+            ( model, Cmd.none )
+
         Save ->
             savePerson model
 
@@ -64,9 +67,6 @@ update msg model =
 
         Mdl msg_ ->
             Material.update Mdl msg_ model
-
-        _ ->
-            ( model, Cmd.none )
 
 
 savePerson : Model -> ( Model, Cmd Msg )
