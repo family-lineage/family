@@ -24,6 +24,7 @@ import Models
         )
 import PersonSelect exposing (peopleSelect)
 import PersonViews exposing (peopleView)
+import PersonFilterViews exposing (filterView)
 
 
 row : List (Options.Style a)
@@ -36,6 +37,8 @@ formView model =
     grid []
         [ cell row
             [ personForm model
+            , hr [] []
+            , filterView model
             , hr [] []
             , peopleView model.people
             , hr [] []
