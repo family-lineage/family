@@ -22,7 +22,6 @@ import Models
         , femalePeople
         , getPersonName
         )
-import PersonSelect exposing (peopleSelect)
 import PersonFilterViews exposing (filterView)
 
 
@@ -70,13 +69,6 @@ personForm model =
                     ]
                 ]
             , cell row
-                [ peopleSelect [ 7, 0 ]
-                    (malePeople model.personId)
-                    model
-                    model.personFather
-                    ChangePersonFather
-                ]
-            , cell row
                 [ label []
                     [ text
                         ("Mother "
@@ -85,26 +77,12 @@ personForm model =
                     ]
                 ]
             , cell row
-                [ peopleSelect [ 8, 0 ]
-                    (femalePeople model.personId)
-                    model
-                    model.personMother
-                    ChangePersonMother
-                ]
-            , cell row
                 [ label []
                     [ text
                         ("Spouse"
                             ++ getPersonName model.people model.personSpouse
                         )
                     ]
-                ]
-            , cell row
-                [ peopleSelect [ 9, 0 ]
-                    (\p -> p)
-                    model
-                    model.personSpouse
-                    ChangePersonSpouse
                 ]
             , cell row
                 [ Button.render
