@@ -2,7 +2,7 @@ module Views exposing (..)
 
 import Html exposing (Html, div, text, label, h2, p, hr, span)
 import Html.Attributes exposing (style)
-import Html.Events exposing (onSubmit)
+import Html.Events exposing (onSubmit, onClick)
 import Material.Grid exposing (grid, cell, size, Device(..))
 import Material.Layout as Layout
 import Material.Textfield as Textfield
@@ -62,26 +62,26 @@ personForm model =
                 [ checkbox ToggleIsPersonSelf model "Is this you?" ]
             , cell row
                 [ label []
-                    [ text
-                        ("Father "
-                            ++ getPersonName model.people model.personFather
-                        )
+                    [ text "Father: "
+                    , span
+                        [ onClick (ChangePersonFather Nothing) ]
+                        [ text (getPersonName model.people model.personFather) ]
                     ]
                 ]
             , cell row
                 [ label []
-                    [ text
-                        ("Mother "
-                            ++ getPersonName model.people model.personMother
-                        )
+                    [ text "Mother: "
+                    , span
+                        [ onClick (ChangePersonMother Nothing) ]
+                        [ text (getPersonName model.people model.personMother) ]
                     ]
                 ]
             , cell row
                 [ label []
-                    [ text
-                        ("Spouse"
-                            ++ getPersonName model.people model.personSpouse
-                        )
+                    [ text "Spouse: "
+                    , span
+                        [ onClick (ChangePersonSpouse Nothing) ]
+                        [ text (getPersonName model.people model.personSpouse) ]
                     ]
                 ]
             , cell row
