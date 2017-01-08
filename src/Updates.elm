@@ -57,6 +57,11 @@ update msg model =
             , Cmd.none
             )
 
+        ChangeFilterPersonName name ->
+            ( { model | filterPersonName = name }
+            , Cmd.none
+            )
+
         Mdl msg_ ->
             Material.update Mdl msg_ model
 

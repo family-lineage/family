@@ -37,6 +37,7 @@ type alias Model =
     , personSpouse : Maybe PersonId
     , isPersonSelf : Bool
     , isFormValid : Bool
+    , filterPersonName : String
     , mdl : Material.Model
     }
 
@@ -52,6 +53,7 @@ initialModel =
     , personSpouse = Nothing
     , isPersonSelf = False
     , isFormValid = False
+    , filterPersonName = ""
     , mdl = Material.model
     }
 

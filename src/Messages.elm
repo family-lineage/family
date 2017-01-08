@@ -13,5 +13,6 @@ type Msg
     | ChangePersonMother (Maybe PersonId)
     | ChangePersonFather (Maybe PersonId)
     | ChangePersonSpouse (Maybe PersonId)
+    | ChangeFilterPersonName String
     | Save
     | Mdl (Material.Msg Msg)
