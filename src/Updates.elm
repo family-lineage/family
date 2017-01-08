@@ -23,6 +23,7 @@ update msg model =
                 , personFather = person.fatherId
                 , personSpouse = person.spouseId
                 , isPersonSelf = person.isPersonSelf
+                , isFormValid = True
               }
             , Cmd.none
             )
