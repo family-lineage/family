@@ -23,7 +23,6 @@ import Models
         , getPersonName
         )
 import PersonSelect exposing (peopleSelect)
-import PersonViews exposing (peopleView)
 import PersonFilterViews exposing (filterView)
 
 
@@ -39,8 +38,6 @@ formView model =
             [ personForm model
             , hr [] []
             , filterView model
-            , hr [] []
-            , peopleView model.people
             , hr [] []
             , p [] [ text (toString model) ]
             ]
