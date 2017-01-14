@@ -37,13 +37,19 @@ type alias Model =
     , personSpouse : Maybe PersonId
     , isPersonSelf : Bool
     , isFormValid : Bool
+    , filterPersonName : String
     , mdl : Material.Model
     }
 
 
 initialModel : Model
 initialModel =
-    { people = []
+    { people =
+        [ newSimplePerson 1 "Person One" Male
+        , newSimplePerson 2 "Person Two" Female
+        , newSimplePerson 3 "Person Three" Male
+        , newSimplePerson 4 "Person Four" Male
+        ]
     , personId = Nothing
     , personName = ""
     , personGender = Male
@@ -52,7 +58,20 @@ initialModel =
     , personSpouse = Nothing
     , isPersonSelf = False
     , isFormValid = False
+    , filterPersonName = ""
     , mdl = Material.model
+    }
+
+
+newSimplePerson : PersonId -> String -> Gender -> Person
+newSimplePerson personId name gender =
+    { id = personId
+    , name = name
+    , gender = gender
+    , fatherId = Nothing
+    , motherId = Nothing
+    , spouseId = Nothing
+    , isPersonSelf = False
     }
 
 

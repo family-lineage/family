@@ -2,7 +2,7 @@ module Views exposing (..)
 
 import Html exposing (Html, div, text, label, h2, p, hr, span)
 import Html.Attributes exposing (style)
-import Html.Events exposing (onSubmit)
+import Html.Events exposing (onSubmit, onClick)
 import Material.Grid exposing (grid, cell, size, Device(..))
 import Material.Layout as Layout
 import Material.Textfield as Textfield
@@ -22,8 +22,7 @@ import Models
         , femalePeople
         , getPersonName
         )
-import PersonSelect exposing (peopleSelect)
-import PersonViews exposing (peopleView)
+import PersonFilterViews exposing (filterView)
 
 
 row : List (Options.Style a)
@@ -37,7 +36,7 @@ formView model =
         [ cell row
             [ personForm model
             , hr [] []
-            , peopleView model.people
+            , filterView model
             , hr [] []
             , p [] [ text (toString model) ]
             ]
@@ -63,48 +62,27 @@ personForm model =
                 [ checkbox ToggleIsPersonSelf model "Is this you?" ]
             , cell row
                 [ label []
-                    [ text
-                        ("Father "
-                            ++ getPersonName model.people model.personFather
-                        )
+                    [ text "Father: "
+                    , span
+                        [ onClick (ChangePersonFather Nothing) ]
+                        [ text (getPersonName model.people model.personFather) ]
                     ]
-                ]
-            , cell row
-                [ peopleSelect [ 7, 0 ]
-                    (malePeople model.personId)
-                    model
-                    model.personFather
-                    ChangePersonFather
                 ]
             , cell row
                 [ label []
-                    [ text
-                        ("Mother "
-                            ++ getPersonName model.people model.personMother
-                        )
+                    [ text "Mother: "
+                    , span
+                        [ onClick (ChangePersonMother Nothing) ]
+                        [ text (getPersonName model.people model.personMother) ]
                     ]
-                ]
-            , cell row
-                [ peopleSelect [ 8, 0 ]
-                    (femalePeople model.personId)
-                    model
-                    model.personMother
-                    ChangePersonMother
                 ]
             , cell row
                 [ label []
-                    [ text
-                        ("Spouse"
-                            ++ getPersonName model.people model.personSpouse
-                        )
+                    [ text "Spouse: "
+                    , span
+                        [ onClick (ChangePersonSpouse Nothing) ]
+                        [ text (getPersonName model.people model.personSpouse) ]
                     ]
-                ]
-            , cell row
-                [ peopleSelect [ 9, 0 ]
-                    (\p -> p)
-                    model
-                    model.personSpouse
-                    ChangePersonSpouse
                 ]
             , cell row
                 [ Button.render

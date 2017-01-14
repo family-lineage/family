@@ -8,6 +8,9 @@ import Models exposing (Model, Person, newPerson, PersonId)
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        NoOp ->
+            ( model, Cmd.none )
+
         Save ->
             savePerson model
 
@@ -20,6 +23,7 @@ update msg model =
                 , personFather = person.fatherId
                 , personSpouse = person.spouseId
                 , isPersonSelf = person.isPersonSelf
+                , isFormValid = True
               }
             , Cmd.none
             )
@@ -57,11 +61,13 @@ update msg model =
             , Cmd.none
             )
 
+        ChangeFilterPersonName name ->
+            ( { model | filterPersonName = name }
+            , Cmd.none
+            )
+
         Mdl msg_ ->
             Material.update Mdl msg_ model
-
-        _ ->
-            ( model, Cmd.none )
 
 
 savePerson : Model -> ( Model, Cmd Msg )
